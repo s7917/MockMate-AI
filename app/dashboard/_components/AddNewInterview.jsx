@@ -15,8 +15,8 @@ import { chatSession } from "@/utils/GeminiAIModel";
 import { MockInterview } from "@/utils/schema";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
-import moment from "moment";
 import { db } from "@/utils/db";
+import { useRouter } from "next/navigation";
 
 
 
@@ -28,6 +28,7 @@ function AddNewInterview() {
   const [loading, setLoading] = useState(false);
   const [JsonResponse, setJsonResponse] = useState([]);
   const { user } = useUser();
+  const router = useRouter();
 
   // const onSubmit = async (e) => {
   //   setLoading(true);
@@ -76,7 +77,7 @@ function AddNewInterview() {
       const MockJsonResp = responseText
         .replace('```json', '')
         .replace('```', '')
-        .replace(/[\n\r\t]/g, ''); // Remove unwanted characters like new lines, tabs, etc.
+        .replace(/[\n\r\t]/g, '').trim(); // Remove unwanted characters like new lines, tabs, etc.
   
       // Parse the JSON response
       let parsedResponse;
@@ -104,6 +105,7 @@ function AddNewInterview() {
       console.log("Inserted mock ID:", resp?.[0]?.mockId);
       if(resp){
       setOpenDialog(false);
+      router.push(`/dashboard/interview/`  +resp?.[0]?.mockId);
       }
 
     } 
