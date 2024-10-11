@@ -66,7 +66,7 @@ function AddNewInterview() {
     e.preventDefault();
     console.log(jobposition, jobDiscription, yearOfExperience);
   
-    const InputPromt = "Job Position: " + jobposition + " Job Discription: " + jobDiscription + " Year of Experience: " + yearOfExperience + " give us " + process.env.NEXT_PUBLIC_INTERVIEW_COUNT_QUESTION + " top interview questions along with answers in JSON format.";
+    const InputPromt = "Job Position: "+jobposition+" ,Job Discription: " +jobDiscription+" ,Year of Experience: " +yearOfExperience+ "give us" +process.env.NEXT_PUBLIC_INTERVIEW_COUNT_QUESTION+ "top interview questions along with answers in JSON format.";
   
     try {
       const result = await chatSession.sendMessage(InputPromt); 
@@ -76,8 +76,9 @@ function AddNewInterview() {
       // Sanitize the response and remove code block markers
       const MockJsonResp = responseText
         .replace('```json', '')
-        .replace('```', '')
-        .replace(/[\n\r\t]/g, '').trim(); // Remove unwanted characters like new lines, tabs, etc.
+        .replace('```', '') // Remove unwanted characters like new lines, tabs, etc.
+
+        console.log("Sanitized JSON:", MockJsonResp);
   
       // Parse the JSON response
       let parsedResponse;
@@ -90,12 +91,12 @@ function AddNewInterview() {
         return; // Exit if parsing fails
       }
   
-      setJsonResponse(parsedResponse); // Update state with the parsed JSON
+      setJsonResponse(MockJsonResp); // Update state with the parsed JSON
   
       // Insert the parsed JSON into the database
       const resp = await db.insert(MockInterview).values({
         mockId: uuidv4(),
-        jsonMockRes: parsedResponse,
+        jsonMockRes: MockJsonResp,
         jobPosition: jobposition || "Unknown",
         jobDesc: jobDiscription || "No description",
         jobExperience: yearOfExperience,

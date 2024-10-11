@@ -54,9 +54,11 @@ import { MockInterview } from "@/utils/schema";
 import { db } from "@/utils/db";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
-import { EyeOff, Ghost, Lightbulb } from "lucide-react";
+import { EyeOff, Ghost, Lightbulb} from "lucide-react";
+import Link from "next/link";
 
-function Interview({ params }) {
+
+function Interview({params}) {
   const [interviewData, setInterviewData] = useState([]);
   const [webCamEnabled, setWebCamEnabled] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false); // Track permission denial
@@ -128,7 +130,9 @@ function Interview({ params }) {
       </div>
          </div>
          <div className=' flex justify-end items-end mt-3'>
-         <Button>Start</Button>
+          <Link href={'/dashboard/Interview/'+params.interviewid+'/start'}>
+         <Button>Start Interview</Button>
+         </Link>
          </div>
       
     </div>
