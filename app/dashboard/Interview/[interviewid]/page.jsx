@@ -58,6 +58,7 @@ import { EyeOff, Ghost, Lightbulb} from "lucide-react";
 import Link from "next/link";
 
 
+
 function Interview({params}) {
   const [interviewData, setInterviewData] = useState([]);
   const [webCamEnabled, setWebCamEnabled] = useState(false);
@@ -99,9 +100,9 @@ function Interview({params}) {
     
       <div className='flex flex-col my-5 gap-5 '>
         <div className=' flex flex-col gap-5  p-5 rounded-lg border'>
-          <h2 className='text-lg'><strong>Job Role /Position : </strong>{interviewData.jobPosition}</h2>
-         <h2 className='text-lg'><strong>Job Discription / Techstack : </strong>{interviewData.jobDesc}</h2>
-         <h2 className='text-lg'><strong>Year of Experience : </strong>{interviewData.jobExperience}</h2>
+          <h2 className='text-lg'><strong>Job Role /Position : </strong>{interviewData?.jobPosition}</h2>
+         <h2 className='text-lg'><strong>Job Discription / Techstack : </strong>{interviewData?.jobDesc}</h2>
+         <h2 className='text-lg'><strong>Year of Experience : </strong>{interviewData?.jobExperience}</h2>
         </div>
 
         <div className='p-5 border rounded-lg border-yellow-300 bg-yellow-200'>
