@@ -10,7 +10,7 @@ import { chatSession } from '@/utils/GeminiAIModel'
 import { UserAnswer } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import { db } from '@/utils/db'
-import { set } from 'mongoose'
+
 
 function RecordAnswersection({activeQuestionIndex, mockInterviewQuestion ,interviewData}) {
 const[useranswer , setuseranswer]=useState(''); 
