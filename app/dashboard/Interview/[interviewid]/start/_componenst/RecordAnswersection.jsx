@@ -10,6 +10,7 @@ import { chatSession } from '@/utils/GeminiAIModel'
 import { UserAnswer } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import { db } from '@/utils/db'
+import { set } from 'mongoose'
 
 function RecordAnswersection({activeQuestionIndex, mockInterviewQuestion ,interviewData}) {
 const[useranswer , setuseranswer]=useState(''); 
@@ -22,6 +23,7 @@ const [loading , setloading]=useState(false);
         results,
         startSpeechToText,
         stopSpeechToText,
+        setResults,
       } = useSpeechToText({
         continuous: true,
         useLegacyResults: false
@@ -85,12 +87,15 @@ const [loading , setloading]=useState(false);
           
           if (resp) {
             toast('Answer Saved Successfully');
+            setuseranswer('');
+            setResults([]);
           }
         } catch (error) {
           console.error(' DB Error :', error);
           toast('Error saving answer');
         } finally {
           setuseranswer('');
+          setResults([]);
           setloading(false);
         }
     

@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import QuestionSection from "./_componenst/QuestionSection";
 import RecordAnswersection from "./_componenst/RecordAnswersection";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function StartInterview({ params }) {
   const [interviewData, setInterviewData] = useState();
@@ -66,7 +67,9 @@ function StartInterview({ params }) {
       <div className="flex justify-end gap-6 mb-6">
        {activeQuestionIndex>0 && <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex-1)}>Previous Question</Button>}
           { activeQuestionIndex != mockInterviewQuestion?.length-1 && <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex+1)}>Next Question</Button>}
-       { activeQuestionIndex == mockInterviewQuestion?.length-1 && <Button>End Interview</Button>}
+       { activeQuestionIndex == mockInterviewQuestion?.length-1 && 
+           <Link href={'/dashboard/Interview/'+interviewData?.mockId+"/feedback"}>
+       <Button>End Interview</Button> </Link>}
 
 
       </div>
