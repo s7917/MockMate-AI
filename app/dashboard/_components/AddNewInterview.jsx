@@ -106,7 +106,7 @@ function AddNewInterview() {
       console.log("Inserted mock ID:", resp?.[0]?.mockId);
       if(resp){
       setOpenDialog(false);
-      router.push(`/dashboard/interview/`  +resp?.[0]?.mockId);
+      router.push(`/dashboard/Interview/`  +resp?.[0]?.mockId);
       }
 
     } 
